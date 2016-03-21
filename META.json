@@ -1,0 +1,13 @@
+{
+   "perl" : "6.*",
+   "name" : "Parse::STDF",
+   "version" : "0.1.0",
+   "author" : [ "Erick Jordan" ],
+   "description" : "Module for parsing files in Standard Test Data Format",
+   "provides" : {
+      "Parse::STDF" : "lib/Parse/STDF.pm6"
+   },
+   "depends" : [ ],
+   "resources" : [ ],
+   "source-url" : "git://github.com/erickjordan/perl6-Parse-STDF.git"
+}
