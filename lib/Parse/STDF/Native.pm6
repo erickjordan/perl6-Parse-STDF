@@ -12,6 +12,7 @@ enum stdf_runtime_settings is export (
   STDF_SETTING_VERSION => 0x002,    # Query the STDF spec version
   STDF_SETTING_BYTE_ORDER => 0x003, # Query the byte order
 );
+
 enum dtc_Vn_type is export (
   GDR_B0 => 0,
   GDR_U1 => 1,
@@ -28,7 +29,7 @@ enum dtc_Vn_type is export (
   GDR_N1 => 13,
 );
 
-my class dtc_Cn is repr('CStruct') is export
+class dtc_Cn is repr('CStruct') is export
 {
   has CArray[int8] $.data;
   method cnstr
@@ -42,7 +43,7 @@ my class dtc_Cn is repr('CStruct') is export
   }
 }
 
-my class dtc_Bn is repr('CStruct') is export
+class dtc_Bn is repr('CStruct') is export
 {
   has CArray[uint8] $.data;
   method bnbuf
@@ -56,7 +57,7 @@ my class dtc_Bn is repr('CStruct') is export
   }
 }
 
-my class dtc_Dn is repr('CStruct') is export
+class dtc_Dn is repr('CStruct') is export
 {
   has CArray[uint8] $.data;
   method dnbuf
@@ -72,7 +73,7 @@ my class dtc_Dn is repr('CStruct') is export
 }
 
 
-my class dtc_Tm is repr('CStruct') is export
+class dtc_Tm is repr('CStruct') is export
 {
   has uint32 $.data;
   method ctime
@@ -84,7 +85,7 @@ my class dtc_Tm is repr('CStruct') is export
   }
 }
 
-my class dtc_xCn is repr('CStruct') is export
+class dtc_xCn is repr('CStruct') is export
 {
   has Pointer[dtc_Cn] $.data;
   method array(Int $sz)
@@ -98,7 +99,7 @@ my class dtc_xCn is repr('CStruct') is export
   }
 }
 
-my class dtc_xU1 is repr('CStruct') is export
+class dtc_xU1 is repr('CStruct') is export
 {
   has Pointer[uint8] $.data;
   method array(Int $sz)
@@ -112,7 +113,7 @@ my class dtc_xU1 is repr('CStruct') is export
   }
 }
 
-my class dtc_xU2 is repr('CStruct') is export
+class dtc_xU2 is repr('CStruct') is export
 {
   has Pointer[uint16] $.data;
   method array(Int $sz)
@@ -126,7 +127,7 @@ my class dtc_xU2 is repr('CStruct') is export
   }
 }
 
-my class dtc_xR4 is repr('CStruct') is export
+class dtc_xR4 is repr('CStruct') is export
 {
   has Pointer[num32] $.data;
   method array(Int $sz)
@@ -140,7 +141,7 @@ my class dtc_xR4 is repr('CStruct') is export
   }
 }
 
-my class dtc_xN1 is repr('CStruct') is export
+class dtc_xN1 is repr('CStruct') is export
 {
   has Pointer[uint8] $.data;
   method array(Int $sz)
@@ -154,7 +155,7 @@ my class dtc_xN1 is repr('CStruct') is export
   }
 }
 
-my class rec_header is repr('CStruct') is export
+class rec_header is repr('CStruct') is export
 {
   has Pointer[void] $.stdf_file;
   has uint32 $.state;
@@ -163,26 +164,26 @@ my class rec_header is repr('CStruct') is export
   has uint32 $.REC_SUB;
 }
 
-my class rec_unknown is repr('CStruct') is export
+class rec_unknown is repr('CStruct') is export
 {
   HAS rec_header $.header;
   has Pointer[void] $.data;
 }
 
-my class rec_far is repr('CStruct') is export
+class rec_far is repr('CStruct') is export
 {
   HAS rec_header $.header;
   has uint8 $.CPU_TYPE;
   has uint8 $.STDF_VER;
 }
 
-my class rec_dtr is repr('CStruct') is export
+class rec_dtr is repr('CStruct') is export
 {
   HAS rec_header $.header;
   HAS dtc_Cn $.TEXT_DAT;
 }
 
-my class rec_sdr is repr('CStruct') is export
+class rec_sdr is repr('CStruct') is export
 {
   HAS rec_header $.header;
   has uint8 $.HEAD_NUM;
@@ -207,7 +208,7 @@ my class rec_sdr is repr('CStruct') is export
   HAS dtc_Cn $.EXTR_ID;
 }
 
-my class rec_mir is repr('CStruct') is export
+class rec_mir is repr('CStruct') is export
 {
   HAS rec_header $.header;
   HAS dtc_Tm $.SETUP_T;
@@ -250,7 +251,7 @@ my class rec_mir is repr('CStruct') is export
   HAS dtc_Cn $.SUPR_NAM;
 }
 
-my class rec_pcr is repr('CStruct') is export
+class rec_pcr is repr('CStruct') is export
 {
   HAS rec_header $.header;
   has uint8 $.HEAD_NUM;
@@ -262,7 +263,7 @@ my class rec_pcr is repr('CStruct') is export
   has uint32 $.FUNC_CNT;
 }
 
-my class rec_mrr is repr('CStruct') is export
+class rec_mrr is repr('CStruct') is export
 {
   HAS rec_header $.header;
   HAS dtc_Tm $.FINISH_T;
@@ -271,7 +272,7 @@ my class rec_mrr is repr('CStruct') is export
   HAS dtc_Cn $.EXC_DESC;
 }
 
-my class rec_ptr is repr('CStruct') is export
+class rec_ptr is repr('CStruct') is export
 {
   HAS rec_header $.header;
   has uint32 $.TEST_NUM;
@@ -296,14 +297,14 @@ my class rec_ptr is repr('CStruct') is export
   has num32 $.HI_SPEC;
 }
 
-my class rec_pir is repr('CStruct') is export
+class rec_pir is repr('CStruct') is export
 {
   HAS rec_header $.header;
   has uint8 $.HEAD_NUM;
   has uint8 $.SITE_NUM;
 }
 
-my class rec_wir is repr('CStruct') is export
+class rec_wir is repr('CStruct') is export
 {
   HAS rec_header $.header;
   has uint8 $.HEAD_NUM;
@@ -312,7 +313,7 @@ my class rec_wir is repr('CStruct') is export
   HAS dtc_Cn $.WAFER_ID;
 }
 
-my class dtc_Vn_ele_data is repr('CUnion') is export 
+class dtc_Vn_ele_data is repr('CUnion') is export 
 {
   has uint8 $.B0;
   has uint8 $.U1;
@@ -329,19 +330,19 @@ my class dtc_Vn_ele_data is repr('CUnion') is export
   has uint8 $.N1;
 }
 
-my class dtc_Vn_ele is repr('CStruct') is export
+class dtc_Vn_ele is repr('CStruct') is export
 {
   has int8 $.type;
   has Pointer[dtc_Vn_ele_data] $.data;
 }
 
-my class gdr_field is export
+class gdr_field is export
 {
   has int8 $.type;
   has dtc_Vn_ele_data $.data;
 }
 
-my class rec_gdr is repr('CStruct') is export
+class rec_gdr is repr('CStruct') is export
 {
   HAS rec_header $.header;
   has uint16 $.FLD_CNT;
@@ -354,7 +355,7 @@ my class rec_gdr is repr('CStruct') is export
   }
 }
 
-my class rec_prr is repr('CStruct') is export
+class rec_prr is repr('CStruct') is export
 {
   HAS rec_header $.header;
   has uint8 $.HEAD_NUM;
@@ -371,14 +372,14 @@ my class rec_prr is repr('CStruct') is export
   HAS dtc_Bn $.PART_FIX;
 }
 
-my class rec_atr is repr('CStruct') is export
+class rec_atr is repr('CStruct') is export
 {
   HAS rec_header $.header;
   HAS dtc_Tm $.MOD_TIM;
   HAS dtc_Cn $.CMD_LINE;
 }
 
-my class rec_hbr is repr('CStruct') is export
+class rec_hbr is repr('CStruct') is export
 {
   HAS rec_header $.header;
   has uint8 $.HEAD_NUM;
@@ -389,7 +390,7 @@ my class rec_hbr is repr('CStruct') is export
   HAS dtc_Cn $.HBIN_NAM;
 }
 
-my class rec_sbr is repr('CStruct') is export
+class rec_sbr is repr('CStruct') is export
 {
   HAS rec_header $.header;
   has uint8 $.HEAD_NUM;
@@ -400,7 +401,7 @@ my class rec_sbr is repr('CStruct') is export
   HAS dtc_Cn $.SBIN_NAM;
 }
 
-my class rec_pmr is repr('CStruct') is export
+class rec_pmr is repr('CStruct') is export
 {
   HAS rec_header $.header;
   has uint16 $.PMR_INDX;
@@ -412,7 +413,7 @@ my class rec_pmr is repr('CStruct') is export
   has uint8 $.SITE_NUM;
 }
 
-my class rec_pgr is repr('CStruct') is export
+class rec_pgr is repr('CStruct') is export
 {
   HAS rec_header $.header;
   has uint16 $.GRP_INDX;
@@ -421,7 +422,7 @@ my class rec_pgr is repr('CStruct') is export
   HAS dtc_xU2 $.PMR_INDX;
 }
 
-my class rec_plr is repr('CStruct') is export
+class rec_plr is repr('CStruct') is export
 {
   HAS rec_header $.header;
   has uint16 $.GRP_CNT;
@@ -434,14 +435,14 @@ my class rec_plr is repr('CStruct') is export
   HAS dtc_xCn $.RTN_CHAL;
 }
 
-my class rec_rdr is repr('CStruct') is export
+class rec_rdr is repr('CStruct') is export
 {
   HAS rec_header $.header;
   has uint16 $.NUM_BINS;
   HAS dtc_xU2 $.RTST_BIN;
 }
 
-my class rec_wrr is repr('CStruct') is export
+class rec_wrr is repr('CStruct') is export
 {
   HAS rec_header $.header;
   has uint8 $.HEAD_NUM;
@@ -460,7 +461,7 @@ my class rec_wrr is repr('CStruct') is export
   HAS dtc_Cn $.EXC_DESC;
 }
 
-my class rec_wcr is repr('CStruct') is export
+class rec_wcr is repr('CStruct') is export
 {
   HAS rec_header $.header;
   has num32 $.WAFR_SIZ;
@@ -474,7 +475,7 @@ my class rec_wcr is repr('CStruct') is export
   has int8 $.POS_Y;
 }
 
-my class rec_tsr is repr('CStruct') is export
+class rec_tsr is repr('CStruct') is export
 {
   HAS rec_header $.header;
   has uint8 $.HEAD_NUM;
@@ -495,7 +496,7 @@ my class rec_tsr is repr('CStruct') is export
   has num32 $.TST_SQRS;
 }
 
-my class rec_mpr is repr('CStruct') is export
+class rec_mpr is repr('CStruct') is export
 {
   HAS rec_header $.header;
   has uint32 $.TEST_NUM;
@@ -527,7 +528,7 @@ my class rec_mpr is repr('CStruct') is export
   has num32 $.HI_SPEC;
 }
 
-my class rec_ftr is repr('CStruct') is export
+class rec_ftr is repr('CStruct') is export
 {
   HAS rec_header $.header;
   has uint32 $.TEST_NUM;
@@ -560,13 +561,13 @@ my class rec_ftr is repr('CStruct') is export
   HAS dtc_Dn $.SPIN_MAP;
 }
 
-my class rec_bps is repr('CStruct') is export
+class rec_bps is repr('CStruct') is export
 {
   HAS rec_header $.header;
   HAS dtc_Cn $.SEQ_NAME;
 }
 
-my class rec_eps is repr('CStruct') is export
+class rec_eps is repr('CStruct') is export
 {
   HAS rec_header $.header;
 }

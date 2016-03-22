@@ -15,26 +15,26 @@ sub MAIN( Str $stdf )
         when "SDR"
         {
           my $sdr = $s.sdr;
-          say "HEAD_NUM: " ~ $sdr.HEAD_NUM;
-          say "SITE_GRP: " ~ $sdr.SITE_GRP;
-          say "SITE_CNT: " ~ $sdr.SITE_CNT;
-          say "SITE_NUM: " ~ $sdr.SITE_NUM.array($sdr.SITE_CNT);
-          say "HAND_TYP: " ~ $sdr.HAND_TYP.cnstr;
-          say "HAND_ID: "  ~ $sdr.HAND_ID.cnstr;
-          say "CARD_TYP: " ~ $sdr.CARD_TYP.cnstr;
-          say "CARD_ID: "  ~ $sdr.CARD_ID.cnstr;
-          say "LOAD_TYP: " ~ $sdr.LOAD_TYP.cnstr;
-          say "LOAD_ID: "  ~ $sdr.LOAD_ID.cnstr;
-          say "DIB_TYP: "  ~ $sdr.DIB_TYP.cnstr;
-          say "DIB_ID: "   ~ $sdr.DIB_ID.cnstr;
-          say "CABL_TYP: " ~ $sdr.CABL_TYP.cnstr;
-          say "CABL_ID: "  ~ $sdr.CABL_ID.cnstr;
-          say "CONT_TYP: " ~ $sdr.CONT_TYP.cnstr;
-          say "CONT_ID: "  ~ $sdr.CONT_ID.cnstr;
-          say "LASR_TYP: " ~ $sdr.LASR_TYP.cnstr;
-          say "LASR_ID: "  ~ $sdr.LASR_ID.cnstr;
-          say "EXTR_TYP: " ~ $sdr.EXTR_TYP.cnstr;
-          say "EXTR_ID: "  ~ $sdr.EXTR_ID.cnstr;
+          printf("\tHEAD_NUM: %d\n", $sdr.HEAD_NUM);
+          printf("\tSITE_GRP: %d\n", $sdr.SITE_GRP);
+          printf("\tSITE_CNT: %d\n", $sdr.SITE_CNT);
+          print "\tSITE_NUM: ", $sdr.SITE_NUM.array($sdr.SITE_CNT), "\n";
+          printf("\tHAND_TYP: %s\n", $sdr.HAND_TYP.cnstr);
+          printf("\tHAND_ID: %s\n", $sdr.HAND_ID.cnstr);
+          printf("\tCARD_TYP: %s\n", $sdr.CARD_TYP.cnstr);
+          printf("\tCARD_ID: %s\n", $sdr.CARD_ID.cnstr);
+          printf("\tLOAD_TYP: %s\n", $sdr.LOAD_TYP.cnstr);
+          printf("\tLOAD_ID: %s\n", $sdr.LOAD_ID.cnstr);
+          printf("\tDIB_TYP: %s\n", $sdr.DIB_TYP.cnstr);
+          printf("\tDIB_ID: %s\n", $sdr.DIB_ID.cnstr);
+          printf("\tCABL_TYP: %s\n", $sdr.CABL_TYP.cnstr);
+          printf("\tCABL_ID: %s\n", $sdr.CABL_ID.cnstr);
+          printf("\tCONT_TYP: %s\n", $sdr.CONT_TYP.cnstr);
+          printf("\tCONT_ID: %s\n", $sdr.CONT_ID.cnstr);
+          printf("\tLASR_TYP: %s\n", $sdr.LASR_TYP.cnstr);
+          printf("\tLASR_ID: %s\n", $sdr.LASR_ID.cnstr);
+          printf("\tEXTR_TYP: %s\n", $sdr.EXTR_TYP.cnstr);
+          printf("\tEXTR_ID: %s\n", $sdr.EXTR_ID.cnstr);
         }
         default {}
       }

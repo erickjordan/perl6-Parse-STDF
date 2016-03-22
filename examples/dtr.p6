@@ -14,7 +14,7 @@ sub MAIN( Str $stdf )
       {
         when "DTR"
         {
-          say $s.dtr.TEXT_DAT.cnstr;
+          printf("%s\n", $s.dtr.TEXT_DAT.cnstr);
         }
         default {}
       }

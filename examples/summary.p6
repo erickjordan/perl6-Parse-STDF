@@ -15,48 +15,48 @@ sub MAIN( Str $stdf )
         when "MIR"
         {
           my $mir = $s.mir; 
-          say "Started At: "   ~ $mir.START_T.ctime;
-          say "Station Number: "  ~ $mir.STAT_NUM;
-          say "Station Mode: "  ~ $mir.MODE_COD.chr;
-          say "Retst_Code: "  ~ $mir.RTST_COD.chr;
-          say "Lot: "    ~ $mir.LOT_ID.cnstr;
-          say "Part Type: "  ~ $mir.PART_TYP.cnstr;
-          say "Node Name: "  ~ $mir.NODE_NAM.cnstr;
-          say "Tester Type: "  ~ $mir.TSTR_TYP.cnstr;
-          say "Program: "   ~ $mir.JOB_NAM.cnstr; 
-          say "Version: "   ~ $mir.JOB_REV.cnstr;
-          say "Sublot: "  ~ $mir.SBLOT_ID.cnstr;
-          say "Operator: "  ~ $mir.OPER_NAM.cnstr;
-          say "Executive: "  ~ $mir.EXEC_TYP.cnstr;
-          say "Test Code: "  ~ $mir.TEST_COD.cnstr;
-          say "Test Temperature: "  ~ $mir.TST_TEMP.cnstr;
-          say "Package Type: "   ~ $mir.PKG_TYP.cnstr;
-          say "Facility ID: "  ~ $mir.FACIL_ID.cnstr;
-          say "Design Revision: "  ~ $mir.DSGN_REV.cnstr;
-          say "Flow ID: "  ~ $mir.FLOW_ID.cnstr;
+          printf("Started At: %s\n", $mir.START_T.ctime);
+          printf("Station Number: %d\n", $mir.STAT_NUM);
+          printf("Station Mode: %s\n", $mir.MODE_COD.chr);
+          printf("Retst_Code: %s\n", $mir.RTST_COD.chr);
+          printf("Lot: %s\n", $mir.LOT_ID.cnstr);
+          printf("Part Type: %s\n", $mir.PART_TYP.cnstr);
+          printf("Node Name: %s\n", $mir.NODE_NAM.cnstr);
+          printf("Tester Type: %s\n", $mir.TSTR_TYP.cnstr);
+          printf("Program: %s\n", $mir.JOB_NAM.cnstr); 
+          printf("Version: %s\n", $mir.JOB_REV.cnstr);
+          printf("Sublot: %s\n", $mir.SBLOT_ID.cnstr);
+          printf("Operator: %s\n", $mir.OPER_NAM.cnstr);
+          printf("Executive: %s\n", $mir.EXEC_TYP.cnstr);
+          printf("Test Code: %s\n", $mir.TEST_COD.cnstr);
+          printf("Test Temperature: %s\n", $mir.TST_TEMP.cnstr);
+          printf("Package Type: %s\n", $mir.PKG_TYP.cnstr);
+          printf("Facility ID: %s\n", $mir.FACIL_ID.cnstr);
+          printf("Design Revision: %s\n", $mir.DSGN_REV.cnstr);
+          printf("Flow ID: %s\n", $mir.FLOW_ID.cnstr);
         }
         when "SDR"
         {
           my $sdr = $s.sdr;
-          say "Head: " ~ $sdr.HEAD_NUM;
-          say "Site Count: " ~ $sdr.SITE_CNT;
-          say "Active Sites: " ~ $sdr.SITE_NUM.array($sdr.SITE_CNT);
-          say "Handler/Prober: " ~ $sdr.HAND_TYP.cnstr;
-          say "DIB Type: " ~ $sdr.DIB_TYP.cnstr;
-          say "DIB_ID: " ~ $sdr.DIB_ID.cnstr;
+          printf("Head: %d\n", $sdr.HEAD_NUM);
+          printf("Site Count: %d\n", $sdr.SITE_CNT);
+          print "Active Sites: ", $sdr.SITE_NUM.array($sdr.SITE_CNT), "\n";
+          printf("Handler/Prober: %s\n", $sdr.HAND_TYP.cnstr);
+          printf("DIB Type: %s\n", $sdr.DIB_TYP.cnstr);
+          printf("DIB_ID: %s\n", $sdr.DIB_ID.cnstr);
         }
         when "MRR"
         {
           my $mrr = $s.mrr;
-          say "Finished At: " ~ $mrr.FINISH_T.ctime;
+          printf("Finished At: %s\n", $mrr.FINISH_T.ctime);
         }
         when "PCR"
         {
           my $pcr = $s.pcr;
           if ( $pcr.HEAD_NUM == -1 ) # BUG: should say 255, but nativecall (or p6) says this is negative 
           {
-            say "Total bin1 count: " ~ $pcr.GOOD_CNT;
-            say "Total number of parts binned: " ~ $pcr.PART_CNT;
+            printf("Total bin1 count: %d\n", $pcr.GOOD_CNT);
+            printf("Total number of parts binned: %d\n", $pcr.PART_CNT);
           }
         }
         default {}

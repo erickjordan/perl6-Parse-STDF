@@ -8,7 +8,7 @@ sub MAIN( Str $stdf )
   try
   {
     my $s = Parse::STDF.new( stdf => $stdf );
-    say "STDF Version: " ~ $s.ver;
+    printf("STDF Version: %d\n", $s.ver);
     CATCH
     {
       when Parse::STDF::E { say $_.message; }
