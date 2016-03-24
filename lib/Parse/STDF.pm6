@@ -5,6 +5,7 @@ use Parse::STDF::Native;
 
 unit class Parse::STDF;
 
+# Derived exception class, specific to Parse::STDF exceptions
 class E is Exception
 { 
   has $.payload;
@@ -12,10 +13,10 @@ class E is Exception
 }
 
 has $.stdf;
-has $!f = stdf_open($!stdf) || die E.new(payload => "unable to open $!stdf");
+has $!f = stdf_open($!stdf) || die E.new(payload => "unable to open $!stdf"); # internal file handle
 has $!rec;
 has $.recname;
-has $.header;
+has $.header; # generic for all STDF record types
 
 method new(:$stdf)
 {
@@ -46,6 +47,11 @@ method ver
   stdf_get_setting($!f,STDF_SETTING_VERSION, my uint32 $ver);
   return ( $ver );
 }
+
+=begin comment
+  Use of nativecast has the same effect of type casting in C.  This type-casting strategy is
+  exactly how its done for c programs which use libstdf APIs.  See libstdf examples for more detail.
+=end comment
 
 method mir { return ( nativecast(Pointer[rec_mir],$!rec).deref ); }
 method dtr { return ( nativecast(Pointer[rec_dtr],$!rec).deref ); }
@@ -140,6 +146,15 @@ Parse::STDF is a first attempt. It is an object oriented module containing metho
 an underlying C library called C<libstdf> (see L<http://freestdf.sourceforge.net/>).  C<libstdf> performs 
 the grunt work of reading and parsing binary data into STDF records represented as C-structs.  These 
 structs are in turn referenced as Perl objects.
+
+=head1 SEE ALSO
+
+For an intro to the Standard Test Data Format (along with references to detailed documentation) 
+see L<http://en.wikipedia.org/wiki/Standard_Test_Data_Format>.
+
+=head1 AUTHOR
+
+Erick Jordan <ejordan@cpan.com>
 
 =end pod
 

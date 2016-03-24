@@ -4,7 +4,16 @@ use NativeCall;
 unit module Parse::STDF::Native;
 
 =begin comment
-This module is ONLY compatible with STDF Version 4 (see STDF specification).
+
+A few caveats and assorted gotchas:
+
+  - This module is ONLY compatible with STDF Version 4 (see STDF specification)
+  - This module has not been tested with a windows dll version of libstdf
+  - Some of the libstdf field types (e.g dtc_xCn) require C pointer arithmetic to hop from element to element
+    within the data.  Perl6 (as of yet) doesn't have a mechanism for pointer arithmetic, so a kind of
+    bastardasized method using nativecast was employed.  Although this works, some "adjustments" may be 
+    required depending on platform (e.g. x86_64, i686). 
+
 =end comment
 
 enum stdf_runtime_settings is export (
