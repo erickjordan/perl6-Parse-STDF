@@ -18,7 +18,7 @@ has $!rec;
 has $.recname;
 has $.header; # generic for all STDF record types
 
-method new(:$stdf)
+method new(:$stdf is required)
 {
   ( $stdf.IO.e ) || die Parse::STDF::E.new(payload => "$stdf not found");
   self.bless(:$stdf);
