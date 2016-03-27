@@ -28,7 +28,4 @@ $ panda --force install ./perl6-Parse-STDF/
 
 TODO
 ----
-Need to add more t/ tests to verify ARCH_FACTOR setting is working correctly.  Do this by checking expected
-contents from Records: PLR, SDR .. etc.
-
-
+Need to add more t/ tests to verify ARCH_FACTOR setting is working correctly.
