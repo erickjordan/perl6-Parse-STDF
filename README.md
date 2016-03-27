@@ -111,12 +111,6 @@ type cast.  The above can be written as the following in perl6:
 `nativecast` along with some other perl6 tricks made available by NaticeCall makes it possible to navigate libstdf
 objects just as if it were written in C.
 
-## BUGS
-Parse::STDF was developed and tested using Perl 6.c, Rakudo version 2015.12-199-g5ed58f6 built 
-on MoarVM version 2015.12-29-g8079ca5.  There is a bug (see <https://rt.perl.org/Public/Bug/Display.html?id=127144>)
-which impacts some of the class attributes typed as `uint8`.  Until this bug is fixed, workarounds may be needed.
-See **examples/summary.p6** on how to do this.
-
 ## SEE ALSO
 For an intro to the Standard Test Data Format (along with references to detailed documentation) 
 see <http://en.wikipedia.org/wiki/Standard_Test_Data_Format>.
