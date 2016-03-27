@@ -154,7 +154,7 @@ see L<http://en.wikipedia.org/wiki/Standard_Test_Data_Format>.
 
 =head1 AUTHOR
 
-Erick Jordan <ejordan@cpan.com>
+Erick Jordan <ejordan@cpan.org>
 
 =end pod
 

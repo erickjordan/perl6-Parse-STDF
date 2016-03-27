@@ -8,7 +8,7 @@ unit module Parse::STDF::Native;
 Caveats and disclaimers:
 
   - Parse::STDF::Native is ONLY compatible with STDF Version 4 (see STDF specification)
-  - Parse::STDF::Native has not been tested on Windows platforms.
+  - Parse::STDF::Native is ONLY compatible with 32, 64 bit *nix machines.
   - Some libstdf field types (e.g dtc_xCn) require C pointer arithmetic to hop from element to element
     within the data.  NativeCall (as of yet) doesn't have a mechanism for pointer arithmetic, so a kind 
     of bastardasized method using nativecast is employed.  Some adjustments may be required depending on 

@@ -7,13 +7,28 @@ See **examples/summary.p6** on how to do this.
 
 PERFORMANCE
 -----------
-Perl6 is painfully slow.  Waiting for a faster version before making a release.
+Perl6 is painfully slow.  Waiting for a faster version before making a formal release.
 
 TESTING
 -------
-$ PERL6LIB=lib prove -v -r --exec=perl6 t/
+$ cd /path/to/perl6-Parse-STDF
+$ export PERL6LIB=lib
+$ export TEST_AUTHOR=EJ
+$ prove -v -r --exec=perl6 t/
 
 RUNNING EXAMPLES
 ----------------
+$ cd /path/to/perl6-Parse-STDF
 $ export PERL6LIB=lib
 $ examples/ver.p6
+
+INSTALL LOCALLY
+---------------
+$ panda --force install ./perl6-Parse-STDF/
+
+TODO
+----
+Need to add more t/ tests to verify ARCH_FACTOR setting is working correctly.  Do this by checking expected
+contents from Records: PLR, SDR .. etc.
+
+
