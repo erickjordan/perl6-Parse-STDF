@@ -5,10 +5,9 @@ unit module Parse::STDF::Native;
 
 =begin comment
 
-A few caveats and assorted gotchas:
+Caveats and assorted gotchas:
 
   - This module is ONLY compatible with STDF Version 4 (see STDF specification)
-  - This module has not been tested with a windows dll version of libstdf
   - Some of the libstdf field types (e.g dtc_xCn) require C pointer arithmetic to hop from element to element
     within the data.  Perl6 (as of yet) doesn't have a mechanism for pointer arithmetic, so a kind of
     bastardasized method using nativecast was employed.  Although this works, some "adjustments" may be 

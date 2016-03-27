@@ -68,8 +68,7 @@ TODO
 
 ## DEPENDENCIES
 Parse::STDF is dependent upon **libstdf**.  As such, this module is constrained to linux platforms.
-If and when a windows version of libstdf becomes available Parse::STDF should simply work with little
-or no modification.
+If and when a windows version of libstdf becomes available Parse::STDF may require a little modification.
 
 ## TESTED PLAFORMS
 The following platforms have been tested:

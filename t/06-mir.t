@@ -3,7 +3,7 @@ use Test;
 use lib 'lib';
 use Parse::STDF;
 
-plan 3;
+plan 5;
 my $s = Parse::STDF.new( stdf => "t/data/test.stdf" );
 
 while $s.get_record
@@ -15,7 +15,9 @@ while $s.get_record
       ok 1, 'MIR record found in test.stdf';
       my $mir = $s.mir;
       ok $mir.defined, 'MIR object defined';
-      ok $mir.LOT_ID.cnstr eq "LOT_ID" , "LOT_ID eq 'LOT_ID'";
+      is $mir.LOT_ID.cnstr, "LOT_ID", "LOT_ID eq 'LOT_ID'";
+      is $mir.SETUP_T.ctime, "Wed Dec 31 16:00:00 1969'","SETUP_T eq 'Wed Dec 31 16:00:00 1969'";
+      is $mir.START_T.ctime, "Wed Dec 31 16:00:01 1969", "START_T eq 'Wed Dec 31 16:00:01 1969'";
       last;
     }
   }
