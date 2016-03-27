@@ -1,8 +1,6 @@
 #!/usr/bin/env perl6
 
 use v6;
-
-use lib 'lib';
 use Parse::STDF;
 
 sub MAIN( Str $stdf )
@@ -55,7 +53,7 @@ sub MAIN( Str $stdf )
         when "PCR"
         {
           my $pcr = $s.pcr;
-          if ( $pcr.HEAD_NUM == -1 ) # BUG: should say 255, but nativecall (or p6) says this is negative 
+          if ( $pcr.HEAD_NUM == -1 ) # BUG: should say 255, but perl6 says this is negative 
           {
             printf("Total bin1 count: %d\n", $pcr.GOOD_CNT);
             printf("Total number of parts binned: %d\n", $pcr.PART_CNT);

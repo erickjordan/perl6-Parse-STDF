@@ -1,6 +1,5 @@
 use v6;
 use Test;
-use lib 'lib';
 use Parse::STDF;
 
 plan 6;
@@ -16,8 +15,8 @@ while $s.get_record
       my $mir = $s.mir;
       ok $mir.defined, 'MIR object defined';
       is $mir.LOT_ID.cnstr, "LOT_ID", "LOT_ID eq 'LOT_ID'";
-      is $mir.SETUP_T.ctime, "Wed Dec 31 16:00:00 1969", "START_T eq 'Wed Dec 31 16:00:00 1969'";
-      is $mir.START_T.ctime, "Wed Dec 31 16:00:01 1969", "START_T eq 'Wed Dec 31 16:00:01 1969'";
+      is $mir.SETUP_T.ctime, "Wed Dec 31 16:00:01 1969", "START_T eq 'Wed Dec 31 16:00:01 1969'";
+      is $mir.START_T.ctime, "Wed Dec 31 16:00:02 1969", "START_T eq 'Wed Dec 31 16:00:02 1969'";
       is $mir.STAT_NUM, 2, "STAT_NUM == 2";
       last;
     }

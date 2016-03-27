@@ -1,5 +1,5 @@
 {
-   "perl" : "6.*",
+   "perl" : "6.c",
    "name" : "Parse::STDF",
    "version" : "0.1.0",
    "author" : [ "Erick Jordan" ],

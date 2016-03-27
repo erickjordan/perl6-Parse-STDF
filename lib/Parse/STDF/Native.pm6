@@ -5,15 +5,19 @@ unit module Parse::STDF::Native;
 
 =begin comment
 
-Caveats and assorted gotchas:
+Caveats and disclaimers:
 
-  - This module is ONLY compatible with STDF Version 4 (see STDF specification)
-  - Some of the libstdf field types (e.g dtc_xCn) require C pointer arithmetic to hop from element to element
-    within the data.  Perl6 (as of yet) doesn't have a mechanism for pointer arithmetic, so a kind of
-    bastardasized method using nativecast was employed.  Although this works, some "adjustments" may be 
-    required depending on platform (e.g. x86_64, i686). 
+  - Parse::STDF::Native is ONLY compatible with STDF Version 4 (see STDF specification)
+  - Parse::STDF::Native has not been tested on Windows platforms.
+  - Some libstdf field types (e.g dtc_xCn) require C pointer arithmetic to hop from element to element
+    within the data.  NativeCall (as of yet) doesn't have a mechanism for pointer arithmetic, so a kind 
+    of bastardasized method using nativecast is employed.  Some adjustments may be required depending on 
+    platform (e.g. x86_64, i686). 
 
 =end comment
+
+constant LIB =  'libstdf.so'; 
+constant ARCH_FACTOR = $*KERNEL.bits == 32 ?? 1 !! 2; 
 
 enum stdf_runtime_settings is export (
   STDF_SETTING_WRITE_SIZE => 0x001, # Set the output blocksize for writing
@@ -101,7 +105,7 @@ class dtc_xCn is repr('CStruct') is export
     my @a;
     for 0..$sz-1 -> $i 
     {
-      @a.push(nativecast(Pointer[dtc_Cn], Pointer[dtc_Cn].new($!data+($i*4))).deref);
+      @a.push(nativecast(Pointer[dtc_Cn], Pointer[dtc_Cn].new($!data+($i*4*ARCH_FACTOR))).deref);
     }
     return(@a);
   }
@@ -115,7 +119,7 @@ class dtc_xU1 is repr('CStruct') is export
     my @a;
     for 0..$sz-1 -> $i 
     {
-      @a.push(nativecast(Pointer[uint8], Pointer[uint8].new($!data+($i*1))).deref);
+      @a.push(nativecast(Pointer[uint8], Pointer[uint8].new($!data+($i*1*ARCH_FACTOR))).deref);
     }
     return(@a);
   }
@@ -129,7 +133,7 @@ class dtc_xU2 is repr('CStruct') is export
     my @a;
     for 0..$sz-1 -> $i 
     {
-      @a.push(nativecast(Pointer[uint16], Pointer[uint16].new($!data+($i*2))).deref);
+      @a.push(nativecast(Pointer[uint16], Pointer[uint16].new($!data+($i*2*ARCH_FACTOR))).deref);
     }
     return(@a);
   }
@@ -143,7 +147,7 @@ class dtc_xR4 is repr('CStruct') is export
     my @a;
     for 0..$sz-1 -> $i 
     {
-      @a.push(nativecast(Pointer[num32], Pointer[num32].new($!data+($i*4))).deref);
+      @a.push(nativecast(Pointer[num32], Pointer[num32].new($!data+($i*4*ARCH_FACTOR))).deref);
     }
     return(@a);
   }
@@ -157,7 +161,7 @@ class dtc_xN1 is repr('CStruct') is export
     my @a;
     for 0..$sz-1 -> $i 
     {
-      @a.push(nativecast(Pointer[uint8], Pointer[uint8].new($!data+($i*1))).deref);
+      @a.push(nativecast(Pointer[uint8], Pointer[uint8].new($!data+($i*1*ARCH_FACTOR))).deref);
     }
     return(@a);
   }
@@ -358,7 +362,7 @@ class rec_gdr is repr('CStruct') is export
   method field(Int $i)
   {
     # Roundabout pointer math ... adj 8 bytes to get next address within GEN_DATA
-    my $p = nativecast(Pointer[dtc_Vn_ele], Pointer[dtc_Vn_ele].new($!GEN_DATA+($i*8)));
+    my $p = nativecast(Pointer[dtc_Vn_ele], Pointer[dtc_Vn_ele].new($!GEN_DATA+($i*8*ARCH_FACTOR)));
     return( gdr_field.new( type => $p.deref.type, data => $p.deref.data.deref ) ); 
   }
 }
@@ -582,13 +586,13 @@ class rec_eps is repr('CStruct') is export
 
 
 #------------------ libstdf library functions --------------------
-sub stdf_open(Str) returns Pointer[void] is native('stdf', v0) is export { * }
-sub stdf_close(Pointer[void]) returns int32 is native('stdf', v0)  is export { * }
-sub stdf_read_record(Pointer[void]) returns Pointer[rec_unknown] is native('stdf',v0) is export { * }
-sub stdf_read_record_raw(Pointer[void]) returns Pointer[rec_unknown] is native('stdf',v0) is export { * }
-sub stdf_free_record(Pointer[rec_unknown]) is native('stdf',v0) is export { * }
-sub stdf_get_setting(Pointer[void], int8, uint32 is rw) is native('stdf',v0) is export { * }
-sub stdf_get_rec_name(uint32, uint32) returns Str is native('stdf',v0) is export { * }
-sub stdf_parse_raw_record(Pointer[rec_unknown]) returns Pointer[rec_unknown] is native('stdf',v0) is export { * }
+sub stdf_open(Str) returns Pointer[void] is native(LIB) is export { * }
+sub stdf_close(Pointer[void]) returns int32 is native(LIB)  is export { * }
+sub stdf_read_record(Pointer[void]) returns Pointer[rec_unknown] is native(LIB) is export { * }
+sub stdf_read_record_raw(Pointer[void]) returns Pointer[rec_unknown] is native(LIB) is export { * }
+sub stdf_free_record(Pointer[rec_unknown]) is native(LIB) is export { * }
+sub stdf_get_setting(Pointer[void], int8, uint32 is rw) is native(LIB) is export { * }
+sub stdf_get_rec_name(uint32, uint32) returns Str is native(LIB) is export { * }
+sub stdf_parse_raw_record(Pointer[rec_unknown]) returns Pointer[rec_unknown] is native(LIB) is export { * }
 #------------------- standard library functions --------------------
 sub ctime(uint32 is rw) returns Str is native(Str) is export { * }
