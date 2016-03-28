@@ -595,4 +595,4 @@ sub stdf_get_setting(Pointer[void], int8, uint32 is rw) is native(LIB) is export
 sub stdf_get_rec_name(uint32, uint32) returns Str is native(LIB) is export { * }
 sub stdf_parse_raw_record(Pointer[rec_unknown]) returns Pointer[rec_unknown] is native(LIB) is export { * }
 #------------------- standard library functions --------------------
-sub ctime(uint32 is rw) returns Str is native(Str) is export { * }
+sub ctime(uint64 is rw) returns Str is native(Str) is export { * }
