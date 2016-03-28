@@ -4,6 +4,7 @@ use Parse::STDF;
 
 plan 7;
 my $s = Parse::STDF.new( stdf => "t/data/test.stdf" );
+constant @SITE_NUM = <5 10 15 20>;
 
 while $s.get_record
 {
@@ -16,10 +17,7 @@ while $s.get_record
       ok $sdr.defined, 'SDR object defined';
       is $sdr.SITE_CNT, 4, "SITE_CNT is 4";
       my @sites = $sdr.SITE_NUM.array($sdr.SITE_CNT);
-      is @sites[0], 5,  "sites[0] is 5"; 
-      is @sites[1], 10, "sites[1] is 10"; 
-      is @sites[2], 15, "sites[2] is 15"; 
-      is @sites[3], 20, "sites[3] is 20"; 
+      for $sdr.SITE_NUM.array($sdr.SITE_CNT).kv -> $k, $v { is @SITE_NUM[$k], $v,  "SITE_NUM[$k] is $v"; }
       last;
     }
   }

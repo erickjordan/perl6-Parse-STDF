@@ -4,6 +4,7 @@ use Parse::STDF;
 
 plan 13;
 my $s = Parse::STDF.new( stdf => "t/data/test.stdf" );
+constant @RTST_BIN = <2 4 6 8 10 12 14 16 18 20>;
 
 while $s.get_record
 {
@@ -15,12 +16,7 @@ while $s.get_record
       my $rdr = $s.rdr;
       ok $rdr.defined, 'RDR object defined';
       is $rdr.NUM_BINS, 10, "NUM_BINS is 10";
-      my @bins = $rdr.RTST_BIN.array($rdr.NUM_BINS);
-      for 0..$rdr.NUM_BINS-1 -> $i 
-      {
-        my $val = ($i+1)*2;
-        is @bins[$i], $val, "bin[$i] is $val"; 
-      }
+      for $rdr.RTST_BIN.array($rdr.NUM_BINS).kv -> $k, $v { is @RTST_BIN[$k], $v, "RTST_BIN[$k] is $v"; }
       last;
     }
   }

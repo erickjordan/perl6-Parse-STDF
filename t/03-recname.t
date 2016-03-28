@@ -8,4 +8,4 @@ my %rec_names = :MIR(0), :SDR(0), :PCR(0), :MRR(0), :WIR(0), :PIR(0), :DTR(0), :
                 :SBR(0), :PMR(0), :PGR(0), :PLR(0), :RDR(0), :WRR(0), :WCR(0), :TSR(0), :MPR(0), 
 				:FTR(0), :BPS(0), :EPS(0);
 while $s.get_record { %rec_names{$s.recname}++; }
-for %rec_names.kv -> $key, $val { ok $val > 0, "Checked record name: $key"; }
+for %rec_names.kv -> $k, $v { ok $v > 0, "Checked record name: $k"; }
