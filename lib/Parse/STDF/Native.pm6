@@ -119,7 +119,7 @@ class dtc_xU1 is repr('CStruct') is export
     my @a;
     for 0..$sz-1 -> $i 
     {
-      @a.push(nativecast(Pointer[uint8], Pointer[uint8].new($!data+($i*1))).deref);
+      @a.push(nativecast(Pointer[uint8], Pointer[uint8].new($!data+$i)).deref);
     }
     return(@a);
   }
