@@ -370,10 +370,11 @@ class rec_gdr is repr('CStruct') is export
   HAS rec_header $.header;
   has uint16 $.FLD_CNT;
   has Pointer[dtc_Vn_ele] $.GEN_DATA;
+  my $FACTOR = $*KERNEL.bits == 32 ?? 1 !! 2;
   method field(Int $i)
   {
     # Roundabout pointer math ... adj 8 bytes to get next address within GEN_DATA
-    my $p = nativecast(Pointer[dtc_Vn_ele], Pointer[dtc_Vn_ele].new($!GEN_DATA+($i*8)));
+    my $p = nativecast(Pointer[dtc_Vn_ele], Pointer[dtc_Vn_ele].new($!GEN_DATA+($i*8*$FACTOR)));
     return( gdr_field.new( type => $p.deref.type, data => $p.deref.data.deref ) ); 
   }
 }
