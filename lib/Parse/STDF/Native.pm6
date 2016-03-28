@@ -17,7 +17,6 @@ Caveats and disclaimers:
 =end comment
 
 constant LIB =  'libstdf.so'; 
-constant ARCH_FACTOR = $*KERNEL.bits == 32 ?? 1 !! 2; 
 
 enum stdf_runtime_settings is export (
   STDF_SETTING_WRITE_SIZE => 0x001, # Set the output blocksize for writing
@@ -103,9 +102,10 @@ class dtc_xCn is repr('CStruct') is export
   method array(Int $sz)
   {
     my @a;
+	my $FACTOR = $*KERNEL.bits == 32 ?? 1 !! 2;
     for 0..$sz-1 -> $i 
     {
-      @a.push(nativecast(Pointer[dtc_Cn], Pointer[dtc_Cn].new($!data+($i*4*ARCH_FACTOR))).deref);
+      @a.push(nativecast(Pointer[dtc_Cn], Pointer[dtc_Cn].new($!data+($i*4*$FACTOR))).deref);
     }
     return(@a);
   }
@@ -119,7 +119,7 @@ class dtc_xU1 is repr('CStruct') is export
     my @a;
     for 0..$sz-1 -> $i 
     {
-      @a.push(nativecast(Pointer[uint8], Pointer[uint8].new($!data+($i*1*ARCH_FACTOR))).deref);
+      @a.push(nativecast(Pointer[uint8], Pointer[uint8].new($!data+($i*1))).deref);
     }
     return(@a);
   }
@@ -133,7 +133,7 @@ class dtc_xU2 is repr('CStruct') is export
     my @a;
     for 0..$sz-1 -> $i 
     {
-      @a.push(nativecast(Pointer[uint16], Pointer[uint16].new($!data+($i*2*ARCH_FACTOR))).deref);
+      @a.push(nativecast(Pointer[uint16], Pointer[uint16].new($!data+($i*2))).deref);
     }
     return(@a);
   }
@@ -147,7 +147,7 @@ class dtc_xR4 is repr('CStruct') is export
     my @a;
     for 0..$sz-1 -> $i 
     {
-      @a.push(nativecast(Pointer[num32], Pointer[num32].new($!data+($i*4*ARCH_FACTOR))).deref);
+      @a.push(nativecast(Pointer[num32], Pointer[num32].new($!data+($i*4))).deref);
     }
     return(@a);
   }
@@ -161,7 +161,7 @@ class dtc_xN1 is repr('CStruct') is export
     my @a;
     for 0..$sz-1 -> $i 
     {
-      @a.push(nativecast(Pointer[uint8], Pointer[uint8].new($!data+($i*1*ARCH_FACTOR))).deref);
+      @a.push(nativecast(Pointer[uint8], Pointer[uint8].new($!data+($i*1))).deref);
     }
     return(@a);
   }
@@ -362,7 +362,7 @@ class rec_gdr is repr('CStruct') is export
   method field(Int $i)
   {
     # Roundabout pointer math ... adj 8 bytes to get next address within GEN_DATA
-    my $p = nativecast(Pointer[dtc_Vn_ele], Pointer[dtc_Vn_ele].new($!GEN_DATA+($i*8*ARCH_FACTOR)));
+    my $p = nativecast(Pointer[dtc_Vn_ele], Pointer[dtc_Vn_ele].new($!GEN_DATA+($i*8)));
     return( gdr_field.new( type => $p.deref.type, data => $p.deref.data.deref ) ); 
   }
 }
