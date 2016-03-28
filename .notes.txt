@@ -5,6 +5,11 @@ on MoarVM version 2015.12-29-g8079ca5.  There is a bug (see <https://rt.perl.org
 which impacts some of the class attributes typed as `uint8`.  Until this bug is fixed, workarounds may be needed.
 See **examples/summary.p6** on how to do this.
 
+When this bug is fixed following files must be updated:
+ - examples/summary.p6
+ - t/12-pcr.t
+ - t/06-mir.t
+
 PERFORMANCE
 -----------
 Perl6 is painfully slow.  Waiting for a faster version before making a formal release.
@@ -26,6 +31,3 @@ INSTALL LOCALLY
 ---------------
 $ panda --force install ./perl6-Parse-STDF/
 
-TODO
-----
-Need to add more t/ tests to verify ARCH_FACTOR setting is working correctly.

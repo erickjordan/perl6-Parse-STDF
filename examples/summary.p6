@@ -53,7 +53,7 @@ sub MAIN( Str $stdf )
         when "PCR"
         {
           my $pcr = $s.pcr;
-          if ( $pcr.HEAD_NUM == -1 ) # BUG: should say 255, but perl6 says this is negative 
+          if ( $pcr.HEAD_NUM == -1 )  # BUG: #127144
           {
             printf("Total bin1 count: %d\n", $pcr.GOOD_CNT);
             printf("Total number of parts binned: %d\n", $pcr.PART_CNT);
