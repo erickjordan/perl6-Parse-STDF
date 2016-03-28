@@ -159,9 +159,20 @@ class dtc_xN1 is repr('CStruct') is export
   method array(Int $sz)
   {
     my @a;
-    for 0..$sz-1 -> $i 
+    my $hi;
+    my $lo;
+    for 0..($sz div 2)-1 -> $i 
     {
-      @a.push(nativecast(Pointer[uint8], Pointer[uint8].new($!data+($i*1))).deref);
+      my $v = nativecast(Pointer[uint8], Pointer[uint8].new($!data+$i)).deref; 
+      $hi = $v +> 4;
+      $lo = $v - ($hi +< 4);
+      @a.push($hi);
+      @a.push($lo);
+    }
+    if ( $sz mod 2 ) 
+    {
+      my $v = nativecast(Pointer[uint8], Pointer[uint8].new($!data+($sz div 2))).deref; 
+      @a.push($v+>4);
     }
     return(@a);
   }
