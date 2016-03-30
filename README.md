@@ -59,8 +59,6 @@ structs are in turn referenced as Perl objects.
     }
 
 ## INSTALLATION
-**libstdf** (see <http://freestdf.sourceforge.net/>) must be installed on the system before installing Parse::STDF.
-
     $ panda install Parse::STDF
 
 ## TESTED PLAFORMS
