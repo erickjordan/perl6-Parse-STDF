@@ -38,12 +38,12 @@ method new(:$stdf is required)
   CATCH 
   {
     when $_.message ~~ m/
-	^ "Cannot locate native library "
-	( "'" <-[ ' ]> * "'" ) 
-	/
+    ^ "Cannot locate native library "
+    ( "'" <-[ ' ]> * "'" ) 
+    /
     {
       X::Parse::STDF::LibraryMissing.new(:library($/[0])).fail;
-	}
+    }
   }
   ( $stdf.IO.e ) || X::Parse::STDF::NotFound.new(:$stdf).fail;
   self.bless(:$stdf);
