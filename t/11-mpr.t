@@ -2,9 +2,10 @@ use v6;
 use Test;
 use Parse::STDF;
 
-plan 40;
+plan 41;
 try
 {
+  use-ok 'Parse::STDF';
   my $s = Parse::STDF.new( stdf => "t/data/test.stdf" );
   constant @RTN_STAT = <10 11 12 13 14 15 1 2 3 4 5 6 7 8 9>;
   constant @RTN_RSLT = <1.2 2.3 3.4 4.5 5.6 6.7>;
@@ -30,6 +31,6 @@ try
   }
   CATCH
   {
-    when X::Parse::STDF::LibraryMissing { skip-rest($_.message); }
+    when X::Parse::STDF::LibraryMissing { diag $_.message; skip-rest('missing prereq'); }
   }
 }

@@ -2,9 +2,10 @@ use v6;
 use Test;
 use Parse::STDF;
 
-plan 16;
+plan 17;
 try
 {
+  use-ok 'Parse::STDF';
   my $s = Parse::STDF.new( stdf => "t/data/gdr.stdf" );
   constant @FIELDS1 = 'RTA_HEADER', 'Date', '2/25/2015 12:07:00 PM';
   constant @FIELDS2 = 'RTA_SUMMARY', 0, 2, '(pad)', '(pad)', 'N/A', 'AVDD_1v0', 'Voltage Min', '1';
@@ -48,6 +49,6 @@ try
   }
   CATCH
   {
-    when X::Parse::STDF::LibraryMissing { skip-rest($_.message); }
+    when X::Parse::STDF::LibraryMissing { diag $_.message; skip-rest('missing prereq'); }
   }
 }

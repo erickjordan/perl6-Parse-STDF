@@ -2,9 +2,10 @@ use v6;
 use Test;
 use Parse::STDF;
 
-plan 3;
+plan 4;
 try
 {
+  use-ok 'Parse::STDF';
   my $s = Parse::STDF.new( stdf => "t/data/test.stdf" );
 
   while $s.get_record
@@ -23,7 +24,7 @@ try
   }
   CATCH
   {
-    when X::Parse::STDF::LibraryMissing { skip-rest($_.message); }
+    when X::Parse::STDF::LibraryMissing { diag $_.message; skip-rest('missing prereq'); }
   }
 }
 

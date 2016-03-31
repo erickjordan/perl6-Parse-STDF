@@ -2,9 +2,10 @@ use v6;
 use Test;
 use Parse::STDF;
 
-plan 7;
+plan 8;
 try
 {
+  use-ok 'Parse::STDF';
   my $s = Parse::STDF.new( stdf => "t/data/test.stdf" );
   constant @SITE_NUM = <5 10 15 20>;
 
@@ -26,7 +27,7 @@ try
   }
   CATCH
   {
-    when X::Parse::STDF::LibraryMissing { skip-rest($_.message); }
+    when X::Parse::STDF::LibraryMissing { diag $_.message; skip-rest('missing prereq'); }
   }
 }
 
