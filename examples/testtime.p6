@@ -35,7 +35,7 @@ sub MAIN(Str $stdf, Bool :$verbose = False )
     }
     CATCH
     {
-      when Parse::STDF::E { say $_.message; }
+      when X::Parse::STDF { say $_.message; }
       default { say $_; }
     }
   }

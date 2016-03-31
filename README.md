@@ -53,7 +53,7 @@ structs are in turn referenced as Perl objects.
       }
       CATCH
       {
-        when Parse::STDF::E { say $_.message; }
+        when X::Parse::STDF { say $_.message; }
         default { say $_; }
       }
     }

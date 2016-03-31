@@ -5,22 +5,47 @@ use Parse::STDF::Native;
 
 unit class Parse::STDF;
 
-# Derived exception class, specific to Parse::STDF exceptions
-class E is Exception
-{ 
-  has $.payload;
-  method message() { "ERROR: $.payload" };
+# Exception classes specific to Parse::STDF 
+package GLOBAL::X::Parse::STDF 
+{
+  role X::Parse::STDF { }
+  class UnableToOpen does X::Parse::STDF is Exception
+  { 
+    has $.stdf;
+    method message() { "Parse::STDF: unable to open $.stdf" };
+  }
+  class NotFound does X::Parse::STDF is Exception
+  { 
+    has $.stdf;
+    method message() { "Parse::STDF: $.stdf not found" };
+  }
+  class LibraryMissing does X::Parse::STDF is Exception
+  {
+    has $.library;
+    method message() { "Parse::STDF: needs $.library, not found" };
+  }
 }
 
 has $.stdf;
-has $!f = stdf_open($!stdf) || die E.new(payload => "unable to open $!stdf"); # internal file handle
+has $!f = stdf_open($!stdf) || X::Parse::STDF::UnableToOpen.new(:$!stdf).fail; # internal file handle
 has $!rec;
 has $.recname;
 has $.header; # generic for all STDF record types
 
 method new(:$stdf is required)
 {
-  ( $stdf.IO.e ) || die Parse::STDF::E.new(payload => "$stdf not found");
+  # First native call is done here, can trigger X::AdHoc if libstdf is missing.
+  CATCH 
+  {
+    when $_.message ~~ m/
+	^ "Cannot locate native library "
+	( "'" <-[ ' ]> * "'" ) 
+	/
+    {
+      X::Parse::STDF::LibraryMissing.new(:library($/[0])).fail;
+	}
+  }
+  ( $stdf.IO.e ) || X::Parse::STDF::NotFound.new(:$stdf).fail;
   self.bless(:$stdf);
 }
 

@@ -14,7 +14,7 @@ sub MAIN( Str $stdf )
     say "Elapsed time: {now - INIT now} seconds";
     CATCH
     {
-      when Parse::STDF::E { say $_.message; }
+      when X::Parse::STDF { say $_.message; }
       default { say $_; }
     }
   }

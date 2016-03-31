@@ -11,7 +11,7 @@ sub MAIN( Str $stdf )
     printf("STDF Version: %d\n", $s.ver);
     CATCH
     {
-      when Parse::STDF::E { say $_.message; }
+      when X::Parse::STDF { say $_.message; }
       default { say $_; }
     }
   }
