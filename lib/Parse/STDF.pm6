@@ -151,7 +151,7 @@ Parse::STDF - Module for parsing files in Standard Test Data Format
     }
     CATCH
     {
-      when Parse::STDF::E { say $_.message; }
+      when X::Parse::STDF { say $_.message; }
       default { say $_; }
     }
   }
