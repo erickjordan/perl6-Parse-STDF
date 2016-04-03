@@ -1,0 +1,11 @@
+language: perl6
+
+perl6:
+  - latest
+
+os:
+  - linux
+
+install:
+   - rakudobrew build panda
+   - panda installdeps .
