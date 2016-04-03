@@ -13,8 +13,6 @@ an underlying C library called **libstdf** (see <http://freestdf.sourceforge.net
 the grunt work of reading and parsing binary data into STDF records represented as C-structs.  These 
 structs are in turn referenced as Perl6 class objects.
 
-[![Build Status](https://travis-ci.org/erickjordan/perl6-Parse-STDF.svg?branch=master)](https://travis-ci.org/erickjordan/perl6-Parse-STDF)
-
 ## SYNOPSIS
 
     use Parse::STDF;
@@ -66,7 +64,9 @@ structs are in turn referenced as Perl6 class objects.
 ## TESTED PLATFORMS
 The following platforms have been tested:
 *  RHEL Linux 6.x (x84\_64)
-*  Ubuntu 12.04 LTS (i686)
+*  Ubuntu 12.04 LTS (i686)  
+
+[![Build Status](https://travis-ci.org/erickjordan/perl6-Parse-STDF.svg?branch=master)](https://travis-ci.org/erickjordan/perl6-Parse-STDF)
 
 ## NativeCall
 Parse::STDF uses NativeCall to interface with **libstdf**.  Its easy to use, a natural fit and the next best 
