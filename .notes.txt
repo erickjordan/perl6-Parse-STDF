@@ -16,14 +16,10 @@ Perl6 is painfully slow.  Waiting for a faster version before making a formal re
 
 TESTING
 -------
-$ cd /path/to/perl6-Parse-STDF
-$ export PERL6LIB=lib
-$ export TEST_AUTHOR=EJ
-$ prove -v -r --exec=perl6 t/
+$ PERL6LIB=lib prove -v -r --exec=perl6 t/
 
 RUNNING EXAMPLES
 ----------------
-$ cd /path/to/perl6-Parse-STDF
 $ export PERL6LIB=lib
 $ examples/ver.p6
 
