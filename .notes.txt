@@ -25,5 +25,5 @@ $ examples/ver.p6
 
 INSTALL LOCALLY
 ---------------
-$ panda --force install ./perl6-Parse-STDF/
+$ zef --force install ./perl6-Parse-STDF/
 
