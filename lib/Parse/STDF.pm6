@@ -56,8 +56,6 @@ submethod DESTROY
 
 method get_record
 {
-  # Free previous record if defined
-  stdf_free_record($!rec) if ( $!rec.defined );
   $!rec = stdf_read_record($!f);
   if ( $!rec.defined )
   {

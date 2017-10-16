@@ -7,5 +7,5 @@ os:
   - linux
 
 install:
-   - rakudobrew build panda
-   - panda installdeps .
+   - rakudobrew build-zef
+   - zef --deps-only install .
