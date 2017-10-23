@@ -11,7 +11,7 @@ before_install:
    - bunzip2 libstdf-0.4.tar.bz2
    - tar -xvf libstdf-0.4.tar
    - cd libstdf-0.4
-   - ./configure
+   - ./configure --disable-warn-untested
    - make
    - sudo make install
    - sudo ldconfig
