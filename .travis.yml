@@ -6,6 +6,13 @@ perl6:
 os:
   - linux
 
+before_install:
+   - git clone https://git.code.sf.net/p/freestdf/libstdf freestdf-libstdf
+   - cd ./freestdf-libstdf/
+   - ./configure
+   - make
+   - sudo make install
+
 install:
    - rakudobrew build-zef
    - zef --deps-only install .

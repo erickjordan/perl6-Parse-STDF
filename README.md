@@ -59,7 +59,7 @@ structs are in turn referenced as Perl6 class objects.
     }
 
 ## INSTALLATION
-    $ panda install Parse::STDF
+    $ zef install Parse::STDF
 
 ## TESTED PLATFORMS
 The following platforms have been tested:
