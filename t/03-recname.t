@@ -15,7 +15,10 @@ try
   for %rec_names.kv -> $k, $v { ok $v > 0, "Checked record name: $k"; }
   CATCH
   {
-    when X::Parse::STDF::LibraryMissing { diag $_.message; skip-rest('missing prereq'); }
+    when X::Parse::STDF::LibraryMissing { 
+       diag $_.message; 
+       # skip-rest('missing prereq');
+    }
   }
 }
 

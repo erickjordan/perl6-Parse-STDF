@@ -11,7 +11,10 @@ try
   ok defined($s), 'New object instance created for test.stdf';
   CATCH
   {
-    when X::Parse::STDF::LibraryMissing { diag $_.message; skip-rest('missing prereq'); }
+    when X::Parse::STDF::LibraryMissing { 
+      diag $_.message; 
+      # skip-rest('missing prereq');
+    }
   }
 }
 

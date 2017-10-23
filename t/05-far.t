@@ -14,6 +14,9 @@ try
   is $far.CPU_TYPE, 2, 'CPU_TYPE is 2';
   CATCH
   {
-    when X::Parse::STDF::LibraryMissing { diag $_.message; skip-rest('missing prereq'); }
+    when X::Parse::STDF::LibraryMissing { 
+      diag $_.message; 
+      # skip-rest('missing prereq');
+    }
   }
 }

@@ -13,6 +13,9 @@ try
   is $rec_count, 22, 'Read 22 records from test.stdf';
   CATCH
   {
-    when X::Parse::STDF::LibraryMissing { diag $_.message; skip-rest('missing prereq'); }
+    when X::Parse::STDF::LibraryMissing { 
+       diag $_.message; 
+       # skip-rest('prerequisite failed');
+    }
   }
 }

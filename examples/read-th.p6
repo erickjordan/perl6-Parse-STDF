@@ -26,8 +26,6 @@ sub MAIN( Str $stdf )
   my $p2 = Promise.start( { read($stdf) } );
   $p1.result;
   $p2.result;
-# read($stdf);
-# read($stdf);
   say "Elapsed tim: {now - INIT now} seconds";
 }
 

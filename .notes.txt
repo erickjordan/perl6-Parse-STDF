@@ -25,5 +25,10 @@ $ examples/ver.p6
 
 INSTALL LOCALLY
 ---------------
-$ zef --force install ./perl6-Parse-STDF/
+
+$ zef install ./perl6-Parse-STDF/
+
+  -or-
+
+$ zef install --force-test ./perl6-Parse-STDF/ 
 

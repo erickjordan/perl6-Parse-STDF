@@ -10,6 +10,9 @@ try
   is $s.ver, 4, 'STDF version is 4';
   CATCH
   {
-    when X::Parse::STDF::LibraryMissing { diag $_.message; skip-rest('missing prereq'); }
+    when X::Parse::STDF::LibraryMissing { 
+      diag $_.message; 
+      # skip-rest('missing prereq');
+    }
   }
 }

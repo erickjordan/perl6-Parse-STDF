@@ -30,6 +30,9 @@ try
   }
   CATCH
   {
-    when X::Parse::STDF::LibraryMissing { diag $_.message; skip-rest('missing prereq'); }
+    when X::Parse::STDF::LibraryMissing { 
+      diag $_.message; 
+      # skip-rest('missing prereq');
+    }
   }
 }
