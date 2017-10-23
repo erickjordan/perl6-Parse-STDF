@@ -7,8 +7,10 @@ os:
   - linux
 
 before_install:
-   - git clone https://git.code.sf.net/p/freestdf/libstdf freestdf-libstdf
-   - cd ./freestdf-libstdf/
+   - wget https://sourceforge.net/projects/freestdf/files/libstdf/libstdf-0.4.tar.bz2
+   - bunzip2 libstdf-0.4.tar.bz2
+   - tar -xvf libstdf-0.4.tar
+   - cd libstdf-0.4
    - ./configure
    - make
    - sudo make install
