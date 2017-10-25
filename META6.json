@@ -10,5 +10,6 @@
    },
    "depends" : [ ],
    "resources" : [ ],
-   "source-url" : "git://github.com/erickjordan/perl6-Parse-STDF.git"
+   "source-url" : "git://github.com/erickjordan/perl6-Parse-STDF.git",
+   "tags" : ["Parser", "Parsing", "Parse"]
 }
