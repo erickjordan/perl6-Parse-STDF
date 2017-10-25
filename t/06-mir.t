@@ -20,7 +20,7 @@ try
         like $mir.SETUP_T.ctime, /[1969|1970]/, "SETUP_T has year 1969 or 1970";
         like $mir.START_T.ctime, /[1969|1970]/, "START_T has year 1969 or 1970";
         is $mir.STAT_NUM, 2, "STAT_NUM is 2";
-        is $mir.BURN_TIM, -1, "BURN_TIM is -1"; # BUG: #127144
+        is $mir.BURN_TIM, -1, "BURN_TIM is -1"; # BUG: #127210
         last;
       }
     }

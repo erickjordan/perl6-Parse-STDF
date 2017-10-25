@@ -17,7 +17,7 @@ try
         ok 1, 'PCR record found in test.stdf';
         my $pcr = $s.pcr;
         ok $pcr.defined, 'PCR object defined';
-        is $pcr.HEAD_NUM, -1, "HEAD_NUM is -1"; # BUG: #127144
+        is $pcr.HEAD_NUM, -1, "HEAD_NUM is -1"; # BUG: #127210
         last;
       }
     }
