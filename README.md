@@ -59,6 +59,23 @@ structs are in turn referenced as Perl6 class objects.
     }
 
 ## INSTALLATION
+<ul>
+<li>Since Parse::STDF uses libstdf.so, libstdf.so must be in your library path (i.e. /usr/local/lib).
+To install libstdf.so on Ubuntu for example, use the following commands:
+</li>
+</ul>
+    $ wget https://sourceforge.net/projects/freestdf/files/libstdf/libstdf-0.4.tar.bz2
+    $ bunzip2 libstdf-0.4.tar.bz2
+    $ tar -xvf libstdf-0.4.tar
+    $ cd libstdf-0.4
+    $ ./configure --disable-warn-untested
+    $ make
+    $ sudo make install
+    $ sudo ldconfig
+<ul>
+<li>Using zef (Rakudo module management tool) install:
+</li>
+</ul>
     $ zef install Parse::STDF
 
 ## TESTED PLATFORMS
