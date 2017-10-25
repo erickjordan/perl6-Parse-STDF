@@ -5,7 +5,7 @@ on MoarVM version 2017.09.1-614-g1952356.  There is a bug (see <https://rt.perl.
 which impacts some of the class attributes typed as `uint8`.  Until this bug is fixed, workarounds are needed.
 See **examples/summary.p6** on how to do this.
 
-When this bug is fixed following files must be updated:
+When this bug is fixed the following files must be updated:
  - examples/summary.p6
  - t/12-pcr.t
  - t/06-mir.t

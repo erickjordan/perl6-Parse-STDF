@@ -68,6 +68,10 @@ The following platforms have been tested:
 
 [![Build Status](https://travis-ci.org/erickjordan/perl6-Parse-STDF.svg?branch=master)](https://travis-ci.org/erickjordan/perl6-Parse-STDF)
 
+## EXAMPLES
+Have a look at the examples. There are several scripts that demonstrate how to access the underlying objects and their attributes.
+In particular, dump\_records\_to\_ascii.p6 does a fair job of visiting each Parse::STDF object class.
+
 ## NativeCall
 Parse::STDF uses NativeCall to interface with **libstdf**.  Its easy to use, a natural fit and the next best 
 thing since sliced cheese.  No need for ::XS, SWIG (or other bridging software) to interface a C library with Perl.
