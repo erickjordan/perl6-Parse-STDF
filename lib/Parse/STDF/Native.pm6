@@ -8,11 +8,6 @@ unit module Parse::STDF::Native;
 Caveats and disclaimers:
 
   - Parse::STDF::Native is ONLY compatible with STDF Version 4 (see STDF specification)
-  - Parse::STDF::Native is ONLY compatible with 32, 64 bit *nix machines.
-  - Some libstdf field types (e.g dtc_xCn) require C pointer arithmetic to hop from element to element
-    within the data.  NativeCall (as of yet) doesn't have a mechanism for pointer arithmetic, so a kind 
-    of bastardasized method using nativecast is employed.  Some adjustments may be required depending on 
-    platform (e.g. x86_64, i686). 
 
 =end comment
 
@@ -102,11 +97,8 @@ class dtc_xCn is repr('CStruct') is export
   method array(Int $sz)
   {
     my @a;
-	my $FACTOR = $*KERNEL.bits == 32 ?? 1 !! 2;
-    for 0..$sz-1 -> $i 
-    {
-      @a.push(nativecast(Pointer[dtc_Cn], Pointer[dtc_Cn].new($!data+($i*4*$FACTOR))).deref);
-    }
+    my $p = nativecast(Pointer[dtc_Cn], $!data);
+    for 1..$sz { @a.push(($p++).deref); }
     return(@a);
   }
 }
@@ -117,10 +109,8 @@ class dtc_xU1 is repr('CStruct') is export
   method array(Int $sz)
   {
     my @a;
-    for 0..$sz-1 -> $i 
-    {
-      @a.push(nativecast(Pointer[uint8], Pointer[uint8].new($!data+$i)).deref);
-    }
+    my $p = nativecast(Pointer[uint8], $!data);
+    for 1..$sz { @a.push(($p++).deref); }
     return(@a);
   }
 }
@@ -131,10 +121,8 @@ class dtc_xU2 is repr('CStruct') is export
   method array(Int $sz)
   {
     my @a;
-    for 0..$sz-1 -> $i 
-    {
-      @a.push(nativecast(Pointer[uint16], Pointer[uint16].new($!data+($i*2))).deref);
-    }
+    my $p = nativecast(Pointer[uint16], $!data);
+    for 1..$sz { @a.push(($p++).deref); }
     return(@a);
   }
 }
@@ -145,10 +133,8 @@ class dtc_xR4 is repr('CStruct') is export
   method array(Int $sz)
   {
     my @a;
-    for 0..$sz-1 -> $i 
-    {
-      @a.push(nativecast(Pointer[num32], Pointer[num32].new($!data+($i*4))).deref);
-    }
+    my $p = nativecast(Pointer[num32], $!data);
+    for 1..$sz { @a.push(($p++).deref); }
     return(@a);
   }
 }
@@ -161,9 +147,10 @@ class dtc_xN1 is repr('CStruct') is export
     my @a;
     my $hi;
     my $lo;
-    for 0..($sz div 2)-1 -> $i 
+    my $p = nativecast(Pointer[uint8], $!data);
+    for 1..($sz div 2)
     {
-      my $v = nativecast(Pointer[uint8], Pointer[uint8].new($!data+$i)).deref; 
+      my $v = ($p++).deref;
       $hi = $v +> 4;
       $lo = $v - ($hi +< 4);
       @a.push($hi);
@@ -171,7 +158,7 @@ class dtc_xN1 is repr('CStruct') is export
     }
     if ( $sz mod 2 ) 
     {
-      my $v = nativecast(Pointer[uint8], Pointer[uint8].new($!data+($sz div 2))).deref; 
+      my $v = ($p).deref; 
       @a.push($v+>4);
     }
     return(@a);
@@ -370,11 +357,10 @@ class rec_gdr is repr('CStruct') is export
   HAS rec_header $.header;
   has uint16 $.FLD_CNT;
   has Pointer[dtc_Vn_ele] $.GEN_DATA;
-  my $FACTOR = $*KERNEL.bits == 32 ?? 1 !! 2;
   method field(Int $i)
   {
-    # Roundabout pointer math ... adj 8 bytes to get next address within GEN_DATA
-    my $p = nativecast(Pointer[dtc_Vn_ele], Pointer[dtc_Vn_ele].new($!GEN_DATA+($i*8*$FACTOR)));
+    my $p = nativecast(Pointer[dtc_Vn_ele], $!GEN_DATA);
+    for 0..$i-1 {$p++};
     return( gdr_field.new( type => $p.deref.type, data => $p.deref.data.deref ) ); 
   }
 }

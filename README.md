@@ -64,7 +64,7 @@ structs are in turn referenced as Perl6 class objects.
 ## TESTED PLATFORMS
 The following platforms have been tested:
 *  RHEL Linux 6.x (x84\_64)
-*  Ubuntu 12.04 LTS (i686)  
+*  Ubuntu 16.04 LTS (x86\_64)  
 
 [![Build Status](https://travis-ci.org/erickjordan/perl6-Parse-STDF.svg?branch=master)](https://travis-ci.org/erickjordan/perl6-Parse-STDF)
 
