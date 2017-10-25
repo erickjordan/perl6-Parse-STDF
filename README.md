@@ -64,6 +64,7 @@ structs are in turn referenced as Perl6 class objects.
 To install libstdf.so on Ubuntu for example, use the following commands:
 </li>
 </ul>
+<pre><code>
     $ wget https://sourceforge.net/projects/freestdf/files/libstdf/libstdf-0.4.tar.bz2
     $ bunzip2 libstdf-0.4.tar.bz2
     $ tar -xvf libstdf-0.4.tar
@@ -72,11 +73,15 @@ To install libstdf.so on Ubuntu for example, use the following commands:
     $ make
     $ sudo make install
     $ sudo ldconfig
+</code></pre>
 <ul>
 <li>Using zef (Rakudo module management tool) install:
 </li>
 </ul>
+<pre><code>
     $ zef install Parse::STDF
+</code></pre>
+
 
 ## TESTED PLATFORMS
 The following platforms have been tested:
