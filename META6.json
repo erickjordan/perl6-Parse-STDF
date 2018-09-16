@@ -1,7 +1,7 @@
 {
    "perl" : "6.c",
    "name" : "Parse::STDF",
-   "version" : "0.1.2",
+   "version" : "0.1.3",
    "author" : "ejordan",
    "authors" : [ "Erick Jordan <ejordan@cpan.org>" ],
    "description" : "Module for parsing files in Standard Test Data Format",

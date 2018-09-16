@@ -98,8 +98,11 @@ class dtc_xCn is repr('CStruct') is export
   method array(Int $sz)
   {
     my @a;
-    my $p = nativecast(Pointer[dtc_Cn], $!data);
-    for 1..$sz { @a.push(($p++).deref); }
+    if ( $sz > 0 )
+    {
+      my $p = nativecast(Pointer[dtc_Cn], $!data);
+      for 1..$sz { @a.push(($p++).deref); }
+    }
     return(@a);
   }
 }
@@ -110,8 +113,11 @@ class dtc_xU1 is repr('CStruct') is export
   method array(Int $sz)
   {
     my @a;
-    my $p = nativecast(Pointer[uint8], $!data);
-    for 1..$sz { @a.push(($p++).deref); }
+    if ( $sz > 0 )
+    {
+      my $p = nativecast(Pointer[uint8], $!data);
+      for 1..$sz { @a.push(($p++).deref); }
+    }
     return(@a);
   }
 }
@@ -122,8 +128,11 @@ class dtc_xU2 is repr('CStruct') is export
   method array(Int $sz)
   {
     my @a;
-    my $p = nativecast(Pointer[uint16], $!data);
-    for 1..$sz { @a.push(($p++).deref); }
+    if ( $sz > 0 )
+    {
+      my $p = nativecast(Pointer[uint16], $!data);
+      for 1..$sz { @a.push(($p++).deref); }
+    } 
     return(@a);
   }
 }
@@ -134,8 +143,11 @@ class dtc_xR4 is repr('CStruct') is export
   method array(Int $sz)
   {
     my @a;
-    my $p = nativecast(Pointer[num32], $!data);
-    for 1..$sz { @a.push(($p++).deref); }
+    if ( $sz > 0 )
+    {
+      my $p = nativecast(Pointer[num32], $!data);
+      for 1..$sz { @a.push(($p++).deref); }
+    }
     return(@a);
   }
 }
@@ -146,21 +158,24 @@ class dtc_xN1 is repr('CStruct') is export
   method array(Int $sz)
   {
     my @a;
-    my $hi;
-    my $lo;
-    my $p = nativecast(Pointer[uint8], $!data);
-    for 1..($sz div 2)
+    if ( $sz > 0 )
     {
-      my $v = ($p++).deref;
-      $hi = $v +> 4;
-      $lo = $v - ($hi +< 4);
-      @a.push($hi);
-      @a.push($lo);
-    }
-    if ( $sz mod 2 ) 
-    {
-      my $v = ($p).deref; 
-      @a.push($v+>4);
+      my $hi;
+      my $lo;
+      my $p = nativecast(Pointer[uint8], $!data);
+      for 1..($sz div 2)
+      {
+        my $v = ($p++).deref;
+        $hi = $v +> 4;
+        $lo = $v - ($hi +< 4);
+        @a.push($hi);
+        @a.push($lo);
+      }
+      if ( $sz mod 2 ) 
+      {
+        my $v = ($p).deref; 
+        @a.push($v+>4);
+      }
     }
     return(@a);
   }
